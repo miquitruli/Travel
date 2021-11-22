@@ -1,2 +1,7 @@
 <h2>Bucketlist : <%= @bucketlist.name %></h2>
 
+<ol>
+    <% @bucketlist.countries.each do |country| %>
+    <li>Country Name: <%= country.name %></li>
+    <%end%>
+</ol>

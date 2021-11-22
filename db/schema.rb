@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_235835) do
+ActiveRecord::Schema.define(version: 2021_11_22_043236) do
 
- 
+  create_table "bucketlist", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "percentage_completed"
+  end
 
   create_table "bucketlists", force: :cascade do |t|
     t.integer "user_id"
+    t.string "name"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.integer "bucketlist_id"
     t.string "name"
   end
 
