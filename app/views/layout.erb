@@ -17,15 +17,16 @@
     <div class="wrapper">
       
 
-        <%= yield %>
+        <p><%= yield %></p>
 
         <div class="container">
         <%= "<div class='notice'>#{flash[:notice]}</div>" if flash[:notice] %>
 
         <nav>
           <% if logged_in? %>
-            Logged in as: <%= current_user.email %> |
-            <a href="/logout"> Logout </a>
+          <p>Logged in as: <%= current_user.email %></p>
+            <a href="/logout"> Logout </a> |
+            <a href="/bucketlists/new"> Create Bucketlist</a>
             <% else %>
             <a href="/register"> Register </a>
             <a href="/login"> Login </a>

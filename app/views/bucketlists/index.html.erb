@@ -1,0 +1,7 @@
+<h3> Lists of your Bucketlists! </h3>
+
+<ul>
+<% @bucketlist.each do |bucketlist|%>
+    <h4><li><a href="/bucketlists/<%= bucketlist.id %>"><%= bucketlist.name %></a></li></h4>
+    <% end %>
+</ul>
