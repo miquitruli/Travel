@@ -31,7 +31,12 @@ class BucketlistsController < ApplicationController
         end
     end
 
-    
+    post '/bucketlists/:id/countries' do
+        @bucketlist=current_user.bucketlists.find(params[:id])
+
+        @countries = @bucketlist.countries.build(:visited=>params[:visited])
+    end
+
 
     post '/bucketlists/new' do
         "Hello"

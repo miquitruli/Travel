@@ -4,4 +4,8 @@
     <% @bucketlist.countries.each do |country| %>
     <li>Country Name: <%= country.name %></li>
     <%end%>
+
+    <form action="/bucketlists/<%= @bucketlist.id %>/countries" method="POST">
+        <input type="checkbox" name="visited" />
+        <input type="submit" name="Add Country" />
 </ol>

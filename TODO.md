@@ -26,3 +26,4 @@ bucketlist/delete
     /register
     /login
     /logout
+
