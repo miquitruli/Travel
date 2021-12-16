@@ -3,24 +3,46 @@ require 'open-uri'
 require 'pry'
 
 class Scraper
-    def get_page
-        doc = Nokogiri::HTML(open("https://simple.wikipedia.org/wiki/List_of_countries_by_continents"))
+    @@continents=[]
 
-        
+    def get_page
+        doc = Nokogiri::HTML(open("https://www.worldometers.info/geography/7-continents/"))  
     end 
 
     def continents
-        @continent=[]
-        continents = get_page.css("div#toc ul li span.toctext")
-        #.text
-        ind_cont = continents.each do |c|
-            @continent << c.text
+        continents = get_page.css("div.table-responsive tbody tr td a")
+        continents.each do |c|
+            @@continents << c.text 
         end
-        puts @continent
-    end
+        @@continents
+    end 
         
-
+    def country(input)
+        @countries = []
+        continent = input.downcase
+        if continent == "north america" || continent == "south america"
+            continent.gsub!(/\s/,'-')
+            doc = Nokogiri::HTML(open("https://www.worldometers.info/geography/7-continents/#{continent}/"))
+            country_list=doc.css("div.table-responsive tbody tr")     #.css('td') 
+            country_list.each do|c|
+                d = c.css('td')[1]
+                @countries<< d.text
+            end
+            puts @countries
+        elsif continent == "antartica"
+            puts "I don't advice going there!! There is no one living there and it's extremely cold!!"
+        else
+            doc = Nokogiri::HTML(open("https://www.worldometers.info/geography/7-continents/#{continent}/"))
+            country_list=doc.css("div.table-responsive tbody tr")     #.css('td') 
+            country_list.each do|c|
+                d = c.css('td')[1]
+                @countries<< d.text
+            end
+            puts @countries
+        end
+    end
 end
 
-Scraper.new.continents
+Scraper.new.country("Africa")
+
   
