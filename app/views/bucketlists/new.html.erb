@@ -7,11 +7,41 @@
     <p><h4>Select a continent to see all of it's countries</h4></p>
 
     <label for="continent">Continent:</label>
-    <select name="continents">
+    <select id="continents" name="continents">
+        <option>Select a Continent</option>
         <% @continents.each do |continent|%>
             <option value="<%=continent.name%>"><%=continent.name%></option>
         <%end%>
     </select>
+
+    <%@continents.each do|continent|%>
+        <div class="continent-countries" id="<%= continent.name%>">
+            <%continent.countries.each do |country|%>
+                <br/><br/>
+                <input type="checkbox" name="<%=country.name%>" value="<%=country.name%>"/>
+                <label for="<%=country.name%>"><%=country.name%></label>
+            <%end%> 
+        </div>   
+    <%end%>
     <br/><br/>
     <p><input type="submit" value="Create!" /></p>
 </form>
+
+<script>
+    var selectContinents = document.getElementById('continents')
+    document.querySelectorAll('.continent-countries').forEach(function(continentCountry) {
+            // countinentCountry variable contains one element (div)
+            continentCountry.style.display = "none";
+            // .style.display changes the css property display from block to none
+        })
+    // change is an event listener to listen for select dropdown selections
+    selectContinents.addEventListener('change', function(event) {
+        // for each iterates over each element with a class of "continent-countries"
+        document.querySelectorAll('.continent-countries').forEach(function(continentCountry) {
+            // countinentCountry variable contains one element (div)
+            continentCountry.style.display = "none";
+            // .style.display changes the css property display from block to none
+        })
+        document.getElementById(event.target.value).style.display = "block";
+    })
+</script>

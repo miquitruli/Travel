@@ -10,7 +10,7 @@ class BucketlistsController < ApplicationController
     
     get '/bucketlists/new' do
         @continents = Continent.all
-
+        
         erb :"bucketlists/new.html"
     end
 
@@ -25,7 +25,12 @@ class BucketlistsController < ApplicationController
         @bucketlist.name = params[:name]
         @bucketlist.user = current_user
 
+
         if @bucketlist.save
+            params[:countries].each do |country|
+                country = Country.find_by(name: country)
+                BucketlistCountry.create(bucketlist: @bucketlist, country: country)
+            end
             redirect '/bucketlists'
         else
             erb :"bucketlists/new.html"
