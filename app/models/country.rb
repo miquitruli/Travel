@@ -1,3 +1,3 @@
 class Country < ActiveRecord::Base
-    belongs_to :bucketlist
+    belongs_to :continent
 end

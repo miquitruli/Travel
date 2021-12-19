@@ -2,26 +2,23 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-class Scraper
-    @@continents=[]
-
     def get_page
         doc = Nokogiri::HTML(open("https://www.worldometers.info/geography/7-continents/"))  
     end 
 
-    def continents
-        continents = get_page.css("div.table-responsive tbody tr td a")
-        continents.each do |c|
-            @@continents << c.text 
-        end
-        @@continents
-    end 
+   
+    Continent.delete_all
+    continents = get_page.css("div.table-responsive tbody tr td a")
+    continents.each do |c|
+        Continent.create(name: c.text)
+    end
+
         
     def country(input)
         @countries = []
         continent = input.downcase
         if continent == "north america" || continent == "south america"
-            continent.gsub!(/\s/,'-')
+            #continent.gsub!(/\s/,'-')
             doc = Nokogiri::HTML(open("https://www.worldometers.info/geography/7-continents/#{continent}/"))
             country_list=doc.css("div.table-responsive tbody tr")     #.css('td') 
             country_list.each do|c|
@@ -38,11 +35,6 @@ class Scraper
                 d = c.css('td')[1]
                 @countries<< d.text
             end
-            puts @countries
+            @countries
         end
     end
-end
-
-Scraper.new.country("Africa")
-
-  

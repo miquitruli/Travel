@@ -4,6 +4,14 @@
     <p><label for="name">Bucketlist name:</label>
     <input type="text" name="name"></p>
 
-    <p><input type="submit" value="Create!" /></p>
+    <p><h4>Select a continent to see all of it's countries</h4></p>
 
+    <label for="continent">Continent:</label>
+    <select name="continents">
+        <% @continents.each do |continent|%>
+            <option value="<%=continent.name%>"><%=continent.name%></option>
+        <%end%>
+    </select>
+    <br/><br/>
+    <p><input type="submit" value="Create!" /></p>
 </form>

@@ -9,7 +9,8 @@ class BucketlistsController < ApplicationController
     end
     
     get '/bucketlists/new' do
-        
+        @continents = Continent.all
+
         erb :"bucketlists/new.html"
     end
 
