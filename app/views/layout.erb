@@ -12,6 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <style>
+      .notice {
+        color: red;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -25,7 +30,11 @@
         <nav>
           <% if logged_in? %>
           <p>Logged in as: <%= current_user.email %></p>
-            <a href="/logout"> Logout </a> 
+            <a href="/logout"> Logout </a> | 
+            <a href="/bucketlists"> Bucketlist</a> | 
+            <a href="/bucketlists/new"> New Bucketlist</a> |
+            <a href="/bucketlists/countries_visited"> My Visited Countries</a>
+
             <% else %>
             <p>
             <a href="/register"> Register </a>

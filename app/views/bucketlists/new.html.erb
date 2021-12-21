@@ -16,9 +16,9 @@
 
     <%@continents.each do|continent|%>
         <div class="continent-countries" id="<%= continent.name%>">
-            <%continent.countries.each do |country|%>
+            <%continent.countries.order(:name).each do |country|%>
                 <br/><br/>
-                <input type="checkbox" name="<%=country.name%>" value="<%=country.name%>"/>
+                <input type="checkbox" name="country[]" value="<%=country.id%>"/>
                 <label for="<%=country.name%>"><%=country.name%></label>
             <%end%> 
         </div>   
@@ -26,6 +26,8 @@
     <br/><br/>
     <p><input type="submit" value="Create!" /></p>
 </form>
+
+
 
 <script>
     var selectContinents = document.getElementById('continents')

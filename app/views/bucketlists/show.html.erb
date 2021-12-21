@@ -1,12 +1,19 @@
+
+
+<%if flash.has?(:message) %>
+    <p style="color: green"><%= flash[:message]%></p>
+<%end%> 
+
 <h2>Bucketlist : <%= @bucketlist.name %></h2>
 
 <ol>
-    <% @bucketlist.countries.each do |country| %>
-    <li>Country Name: <%= country.name %></li>
+    <% @bucketlist.bucketlist_countries.each do |bucketlist_country| %>
+        <li><%= bucketlist_country.country.name %> <%= bucketlist_country.visited ? "✔️" : "X" %></li> 
     <%end%>
 
-    <form action="/bucketlists/<%= @bucketlist.id %>/countries" method="POST">
-        <input type="checkbox" name="visited" />
-        <input type="submit" name="Add Country" />
     </form>
+
+    <br><button> <a href="/bucketlists/<%= @bucketlist.id %>/edit"> EDIT </a></button>
 </ol>
+
+

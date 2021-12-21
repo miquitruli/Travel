@@ -1,0 +1,15 @@
+<h1> Edit Bucketlist </h1>
+
+<form action="/bucketlists/<%= @bucketlist.id%>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+
+    <p><label for="name">Bucketlist name:</label>
+    <input type="text" name="name" value="<%=@bucketlist.name%>"></p>
+
+    <%@bucketlist.bucketlist_countries.each do |bucketlist_country|%>
+        <li><%=bucketlist_country.country.name%>
+        <input type="checkbox" name="bucketlist_country[]" <%= "checked" if bucketlist_country.visited %> value="<%=bucketlist_country.id%>"/></li>
+    <%end%>
+    
+    <input type="submit" value="Submit"/>
+</form>
