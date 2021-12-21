@@ -25,6 +25,7 @@ class UsersController < ApplicationController
             session["user_id"] = @user.id
             redirect "/"
         else
+            flash[:notice] = "Incorrect password or Email"
             erb :'users/login.html'
         end 
     end
